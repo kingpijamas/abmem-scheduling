@@ -1,0 +1,8 @@
+bin/*
+*.class
+*fossil*
+*FOSSIL*
+*.project
+*.classpath
+*.checkstyle
+*.settings
