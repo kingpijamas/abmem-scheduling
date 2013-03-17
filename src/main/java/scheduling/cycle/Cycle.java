@@ -124,6 +124,11 @@ public class Cycle {
 		return events.getLastPriority();
 	}
 
+	public DateTime getStart() {
+		return start;
+	}
+
+	@Override
 	public String toString() {
 		return "Start: " + start + " Step: " + step + " current: "
 				+ currentStep + " end: " + end;
