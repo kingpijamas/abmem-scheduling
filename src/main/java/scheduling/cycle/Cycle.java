@@ -28,6 +28,7 @@
 package scheduling.cycle;
 
 import org.joda.time.DateTime;
+import org.joda.time.Days;
 import org.joda.time.Period;
 import org.joda.time.ReadablePeriod;
 
@@ -106,6 +107,10 @@ public class Cycle {
 
 	public void addEvent(SimulationEvent event, DateTime date) {
 		events.add(event, date);
+	}
+
+	public void addEvent(SimulationEvent se, DateTime when, Days repeatFreq) {
+		events.add(se, when, repeatFreq);
 	}
 
 	public DateTime getDate() {
