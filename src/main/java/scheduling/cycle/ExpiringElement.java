@@ -7,21 +7,25 @@ import org.joda.time.ReadablePeriod;
 public abstract class ExpiringElement extends CycleElement {
 
 	private DateTime expiration;
-	private ReadablePeriod term;
+	private ReadablePeriod lifetime;
 
-	private ExpiringElement(Cycle circuit, DateTime expiration,
-			ReadablePeriod term) {
-		super(circuit);
+	private ExpiringElement(DateTime expiration, ReadablePeriod term) {
 		this.expiration = expiration;
-		this.term = term;
+		this.lifetime = term;
 	}
 
-	public ExpiringElement(Cycle circuit, DateTime expiration) {
-		this(circuit, expiration, new Period(circuit.getDate(), expiration));
+	private ExpiringElement(Cycle cycle, DateTime expiration,
+			ReadablePeriod term) {
+		this(expiration, term);
+		init(cycle);
 	}
 
-	public ExpiringElement(Cycle circuit, ReadablePeriod term) {
-		this(circuit, circuit.getDate().plus(term), term);
+	public ExpiringElement(Cycle cycle, DateTime expiration) {
+		this(cycle, expiration, new Period(cycle.getDate(), expiration));
+	}
+
+	public ExpiringElement(Cycle cycle, ReadablePeriod term) {
+		this(cycle, cycle.getDate().plus(term), term);
 	}
 
 	public DateTime getExpiration() {
@@ -33,11 +37,11 @@ public abstract class ExpiringElement extends CycleElement {
 	}
 
 	protected ReadablePeriod getTerm() {
-		return term;
+		return lifetime;
 	}
 
 	protected void extendExpiration() {
-		expiration = expiration.plus(term);
+		expiration = expiration.plus(lifetime);
 	}
 
 	protected abstract void expire();

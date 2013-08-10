@@ -4,12 +4,16 @@ import org.joda.time.DateTime;
 
 import scheduling.cycle.exceptions.UnexpectedInvocationException;
 
-public abstract class RegularUseElement extends CycleElement {
+public abstract class SingleUsePerCycleElement extends CycleElement {
 
 	private DateTime lastUse;
 
-	public RegularUseElement(Cycle circuit) {
-		super(circuit);
+	public SingleUsePerCycleElement() {
+		this.lastUse = null;
+	}
+
+	public SingleUsePerCycleElement(Cycle cycle) {
+		super(cycle);
 		this.lastUse = null;
 	}
 

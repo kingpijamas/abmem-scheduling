@@ -4,11 +4,22 @@ import org.joda.time.DateTime;
 
 public abstract class CycleElement {
 	private int birthPeriod;
-	private Cycle circuit;
+	private Cycle cycle;
 
-	public CycleElement(Cycle circuit) {
-		this.circuit = circuit;
-		this.birthPeriod = circuit.getPeriodsFromStart();
+	public CycleElement() {
+	}
+
+	public CycleElement(Cycle cycle) {
+		init(cycle);
+	}
+
+	/**
+	 * To be used when wanting to instance a CycleElement before instancing its
+	 * cycle
+	 */
+	public void init(Cycle cycle) {
+		this.cycle = cycle;
+		this.birthPeriod = cycle.getPeriodsFromStart();
 	}
 
 	protected int getBirth() {
@@ -24,6 +35,6 @@ public abstract class CycleElement {
 	}
 
 	public Cycle getCycle() {
-		return circuit;
+		return cycle;
 	}
 }
